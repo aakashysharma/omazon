@@ -1,0 +1,49 @@
+apply plugin: 'java'
+apply plugin: 'war'
+repositories { mavenCentral() }
+
+dependencies {
+  compile (
+  			'org.springframework:spring-core:3.2.6.RELEASE'
+            ,'org.springframework:spring-context:3.2.6.RELEASE'
+            ,'org.springframework:spring-beans:3.2.6.RELEASE'
+            ,'org.springframework:spring-web:3.2.6.RELEASE'
+            ,'org.springframework:spring-aop:3.2.6.RELEASE'
+            ,'org.springframework:spring-jdbc:3.2.6.RELEASE'
+            ,'org.springframework:spring-webmvc:3.2.6.RELEASE'
+            ,'org.springframework:spring-tx:3.2.6.RELEASE'
+            ,'org.springframework:spring-context-support:3.2.6.RELEASE'
+            ,'org.springframework:spring-orm:3.2.6.RELEASE'
+            ,'org.springframework.security:spring-security-core:3.2.1.RELEASE'            
+            ,'org.hibernate:hibernate-core:4.2.8.Final'
+            ,'org.hibernate:hibernate-entitymanager:4.2.8.Final'            
+            ,'org.hibernate:hibernate-ehcache:4.2.8.Final'
+            ,'org.hibernate:hibernate-testing:4.2.8.Final'
+            ,'org.hibernate:hibernate-cglib-repack:2.1_3'            
+            ,'org.hibernate:hibernate-c3p0:4.2.8.Final'
+            ,'org.hibernate:antlr:2.7.5H3'
+            ,'org.slf4j:slf4j-simple:1.6.1'
+            ,'org.jasypt:jasypt:1.9.2'
+            ,'org.jasypt:jasypt-acegisecurity:1.9.2'
+            ,'com.google.guava:guava:16.0'
+            ,'org.apache.commons:commons-lang3:3.0'
+            ,'javax.servlet:javax.servlet-api:3.0.1'
+            ,'org.codehaus.jackson:jackson-core-asl:1.9.13'
+            ,'org.codehaus.jackson:jackson-mapper-asl:1.9.13'           
+            ,'commons-dbcp:commons-dbcp:1.4' 
+            ,'mysql:mysql-connector-java:5.1.29'
+            ,'org.springframework:spring-test:3.2.5.RELEASE'
+            ,'org.hibernate:hibernate-c3p0:4.1.10.Final'
+            ,'postgresql:postgresql:9.1-901.jdbc4'
+            ,'org.springframework.data:spring-data-redis:1.3.0.RELEASE'
+            ,'redis.clients:jedis:2.4.1'                                            
+            )
+  testCompile (
+  			'org.testng:testng:6.7'
+  			,'org.springframework:spring-test:3.2.5.RELEASE'
+            )
+}
+
+test {
+ 
+}

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:lang="http://www.springframework.org/schema/lang"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:cache="http://www.springframework.org/schema/cache"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd"> 
+   
+   	<import resource="classpath*:config/omazon-service-daoContext.xml"/>
+   	<import resource="classpath*:config/omazon-service-serviceContext.xml"/>
+   	
+   	<context:annotation-config />
+  	<context:component-scan base-package="com.btk.service" />
+    <cache:annotation-driven />
+    
+    <tx:annotation-driven />
+    <!-- JNDI DataSource -->
+    <!-- <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/myds"/> -->
+   	
+   	<!-- Routine DataSource -->
+   	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    	<property name="location" value="classpath:config/jdbc.properties"/>
+    </bean>
+ 
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+        p:driverClassName="${jdbc.driverClassName}"
+        p:url="${jdbc.databaseurl}" p:username="${jdbc.username}"
+        p:password="${jdbc.password}" />
+        
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">        
+        <props>
+            <!-- <prop key="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop> -->
+            <prop key="connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</prop>
+            <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+            <prop key="hibernate.show_sql">true</prop>
+            			
+        </props>
+    	</property>
+    	<property name="annotatedClasses">
+            <list>                
+                <!-- Example Entity Goes Here:: eg: <value>com.btk.service.entity.AuthorEntity</value>-->                
+            </list>
+        </property>
+	</bean>
+    
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+   	
+</beans>   
