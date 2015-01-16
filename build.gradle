@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'war'
 repositories { mavenCentral() }
-
+//gradle dependencies
 dependencies {
   compile (
   			'org.springframework:spring-core:3.2.6.RELEASE'
